@@ -32,7 +32,6 @@ public class TransformPomJUnitVersion {
       int var9 = pluginPaths.length;
 
       int j;
-      int j;
       for(int var10 = 0; var10 < var9; ++var10) {
          String pluginPath = var8[var10];
          XPathExpression expr1 = xpath.compile(pluginPath);

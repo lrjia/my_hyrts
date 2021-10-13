@@ -38,7 +38,7 @@ public class SurefireRewriter {
       }
 
       setAttribute("excludes", plugin, (List)newExcludeList);
-      List<String> newExcludeList = (List)getAttribute("excludes", plugin);
+      newExcludeList = (List)getAttribute("excludes", plugin);
       logger.info("new excludeList: " + newExcludeList);
    }
 

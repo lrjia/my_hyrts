@@ -214,7 +214,6 @@ public final class CFGDiff {
       CFGDiff.Node n;
       int insnCode;
       LabelNode defaultTargetInstruction;
-      CFGDiff.Node n;
       switch(instruction.getType()) {
       case 1:
          if (instruction.getOpcode() == 188) {
@@ -252,7 +251,7 @@ public final class CFGDiff {
       default:
          break;
       case 7:
-         LabelNode targetInstruction = ((JumpInsnNode)instruction).label;
+         targetInstruction = ((JumpInsnNode)instruction).label;
          insnCode = instructions.indexOf(targetInstruction);
          insns = insns + insnCode;
          CFGDiff.Node n1;
@@ -381,7 +380,7 @@ public final class CFGDiff {
          insns = insns + "// line number information";
       case 0:
          if (instruction.getOpcode() == 191 && !this.id_node.containsKey(i + 1) && i + 1 < instructions.size()) {
-            CFGDiff.Node n = new CFGDiff.Node(i + 1);
+            n = new CFGDiff.Node(i + 1);
             this.id_node.put(i + 1, n);
          }
       }
