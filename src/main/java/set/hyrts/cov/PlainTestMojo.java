@@ -10,8 +10,8 @@ import set.hyrts.common.AbstractCoverageMojo;
 @Mojo(name = "test", requiresDependencyResolution = ResolutionScope.TEST)
 @Execute(phase = LifecyclePhase.TEST_COMPILE)
 public class PlainTestMojo extends AbstractCoverageMojo {
-  public void execute() throws MojoExecutionException {
-    this.coverageLevel = null;
-    super.execute();
-  }
+    public void execute() throws MojoExecutionException {
+        this.coverageLevel = null;
+        super.execute();
+    }
 }

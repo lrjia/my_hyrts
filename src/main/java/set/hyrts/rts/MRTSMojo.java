@@ -9,9 +9,9 @@ import set.hyrts.utils.Properties;
 @Deprecated
 @Execute(phase = LifecyclePhase.TEST_COMPILE)
 public class MRTSMojo extends AbstractCoverageMojo {
-  public void execute() throws MojoExecutionException {
-    this.RTS = Properties.RTSVariant.MRTS;
-    this.coverageLevel = "meth-cov";
-    super.execute();
-  }
+    public void execute() throws MojoExecutionException {
+        this.RTS = Properties.RTSVariant.MRTS;
+        this.coverageLevel = "meth-cov";
+        super.execute();
+    }
 }

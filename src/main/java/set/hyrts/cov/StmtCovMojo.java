@@ -10,8 +10,8 @@ import set.hyrts.common.AbstractCoverageMojo;
 @Mojo(name = "stmtCov", requiresDependencyResolution = ResolutionScope.TEST)
 @Execute(phase = LifecyclePhase.TEST_COMPILE)
 public class StmtCovMojo extends AbstractCoverageMojo {
-  public void execute() throws MojoExecutionException {
-    this.coverageLevel = "stmt-cov";
-    super.execute();
-  }
+    public void execute() throws MojoExecutionException {
+        this.coverageLevel = "stmt-cov";
+        super.execute();
+    }
 }

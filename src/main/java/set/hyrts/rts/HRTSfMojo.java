@@ -11,10 +11,10 @@ import set.hyrts.utils.Properties;
 @Mojo(name = "HyRTSf", requiresDependencyResolution = ResolutionScope.TEST)
 @Execute(phase = LifecyclePhase.TEST_COMPILE)
 public class HRTSfMojo extends AbstractCoverageMojo {
-  public void execute() throws MojoExecutionException {
-    this.RTS = Properties.RTSVariant.HyRTSf;
-    this.coverageLevel = "meth-cov";
-    this.hybridLevel = "jk";
-    super.execute();
-  }
+    public void execute() throws MojoExecutionException {
+        this.RTS = Properties.RTSVariant.HyRTSf;
+        this.coverageLevel = "meth-cov";
+        this.hybridLevel = "jk";
+        super.execute();
+    }
 }
