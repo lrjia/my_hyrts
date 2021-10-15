@@ -281,7 +281,7 @@ public class TracerIO {
     public static String getTestCovFilePath(String dirPath, String test) {
         File rootDir = new File(dirPath + File.separator + "hyrts-files" + File.separator + Properties.TRACER_COV_TYPE);
         rootDir.mkdirs();
-        return rootDir.getAbsolutePath() + File.separator + FTracerJUnitUtils.getFileName(test) + ".gz";
+        return rootDir.getAbsolutePath() + File.separator + FTracerJUnitUtils.getFileName(test) + ".txt";
     }
 
     public static String getHyRTSCovDir(String dirPath) {
