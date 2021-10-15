@@ -1,7 +1,7 @@
 package set.hyrts;
 
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    void foo(){
+        System.out.println("bar");
     }
 }
