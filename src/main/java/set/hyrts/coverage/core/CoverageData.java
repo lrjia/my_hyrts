@@ -27,6 +27,23 @@ public class CoverageData {
     public static ConcurrentMap<String, Integer> branchCov = new ConcurrentHashMap();
     public static ConcurrentMap<String, Set<String>> rtType = new ConcurrentHashMap();
 
+    public static void reset(){
+        classId = 0;
+        classIdMap = new ConcurrentHashMap();
+        dotClassIdMap = new ConcurrentHashMap();
+        idClassMap = new ConcurrentHashMap();
+        idMethMap = new ConcurrentHashMap();
+        fieldTypeCache = new ConcurrentHashMap();
+        stringTypeCache = new ConcurrentHashMap();
+        classTypeCache = new ConcurrentHashMap();
+        methCovArray = new boolean[100000][];
+        classCovArray = new boolean[100000];
+        stmtCovSet = new BitSet[100000];
+        blockCovSet = new BitSet[100000][];
+        branchCov = new ConcurrentHashMap();
+        rtType = new ConcurrentHashMap();
+    }
+
     public static int registerClass(String slashClazz, String dotClazz) {
         int id = nextId();
         classIdMap.put(slashClazz, id);

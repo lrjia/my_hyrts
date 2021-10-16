@@ -216,7 +216,7 @@ public class TracerIO {
         } else {
             File[] tests = dir.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
-                    return name.endsWith(".gz");
+                    return name.endsWith(".txt");
                 }
             });
             Map<String, Set<String>> result = new HashMap();
