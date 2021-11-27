@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.jar.JarFile;
 
-public class ClassFileHandler {
+public class ClassFileHandler implements Comparable<ClassFileHandler>{
     public boolean isJar = false;
     public String filePath;
     public String className;
@@ -32,5 +32,11 @@ public class ClassFileHandler {
         }
 
         return (InputStream) is;
+    }
+
+
+    @Override
+    public int compareTo(ClassFileHandler o) {
+        return filePath.compareTo(o.filePath);
     }
 }

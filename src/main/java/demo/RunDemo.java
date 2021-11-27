@@ -25,6 +25,8 @@ import static set.hyrts.coverage.junit.FTracerJUnitUtils.dumpCoverage;
 
 public class RunDemo {
 
+    public static boolean writeBack=true;
+
     public static void instrumentBytecode(String classDir, String dotClassName) throws IOException {
         String slashClassName = dotClassName.replace(".", "/");
         int clazzId = CoverageData.registerClass(slashClassName, dotClassName);
@@ -37,14 +39,17 @@ public class RunDemo {
         byte[] newClass = classWriter.toByteArray();
 
         //写回
-        File newFile = new File(classDir);
-        new FileOutputStream(newFile).write(newClass);
+        if(writeBack){
+            File newFile = new File(classDir);
+            new FileOutputStream(newFile).write(newClass);
+        }
     }
 
     public static void instrumentAll() {
         try {
             CoverageData.reset();
             Set<ClassFileHandler> set= VersionDiff.parseClassPath(Properties.NEW_CLASSPATH);
+
             for (ClassFileHandler c :set){
                 String className=c.className.replace("\\",".");
                 className=className.substring(className.indexOf(targetPacketName));
@@ -62,11 +67,11 @@ public class RunDemo {
 
     public static void execTestCase() throws IOException {
         Properties.NEW_DIR = "./diff_old";
+        writeBack=false;
         instrumentAll();
         new TestCase1().runTest();
         dumpCoverage(TestCase1.class);
 
-        instrumentAll();
         new TestCase2().runTest();
         dumpCoverage(TestCase2.class);
     }
@@ -76,35 +81,48 @@ public class RunDemo {
         VersionDiff.compute(null, "./diff_old", Properties.NEW_CLASSPATH);
     }
 
-    public static void preModify() {
-        try {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static String targetPacketName;
 
-    public static void main(String[] args) throws Exception {
+    public static void init(){
         Properties.TRACER_COV_TYPE = "meth-cov";
         Properties.FILE_CHECKSUM = Properties.RTSVariant.HyRTS + "-checksum";
         Properties.NEW_CLASSPATH = "target/classes/demo/examCode/src/";
         targetPacketName="demo.examCode.src";
+    }
 
-        int step = 3;
+    static void deleteDir(File file){
+        if (file.isDirectory()) {
+            for (File f : file.listFiles())
+                deleteDir(f);
+        }
+        file.delete();
+    }
+    static void clean(){
+        deleteDir(new File("./diff_old"));
+        deleteDir(new File("./diff_new"));
+        new File("./diff_old").mkdir();
+        new File("./diff_new").mkdir();
+    }
 
-        if (step == 1) {
+    public static void main(String[] args) throws Exception {
+        init();
+        if (args[0].equals("instrument")) {
             //rebuild
+            clean();
             serializeOldCode();
             instrumentAll();
-        } else if (step == 2) {
+        } else if (args[0].equals("test")) {
             execTestCase();
-        } else if (step == 3) {
+        } else if (args[0].equals("select")) {
             //modify demo file and rebuild
             Properties.OLD_DIR = "./diff_old";
             Properties.NEW_DIR = "./diff_new";
             System.out.println(HybridRTS.main());
+        }else if (args[0].equals("clean")){
+            clean();
+        }else {
+            System.err.println("unknown");
         }
 
     }

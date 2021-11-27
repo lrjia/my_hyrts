@@ -32,7 +32,8 @@ public class HybridRTS {
 
                 while (var4.hasNext()) {
                     String test = (String) var4.next();
-                    if (!VersionDiff.changedFiles.contains(test.replace(".", "/")) && !isAffected((Set) old_cov_map.get(test), Properties.TRACER_COV_TYPE)) {
+                    if (!VersionDiff.changedFiles.contains(test.replace(".", "/"))
+                            && !isAffected((Set) old_cov_map.get(test), Properties.TRACER_COV_TYPE)) {
                         excluded.add(test);
                         if (!Properties.OLD_DIR.equals(Properties.NEW_DIR)) {
                             File oldV = new File(TracerIO.getTestCovFilePath(Properties.OLD_DIR, test));

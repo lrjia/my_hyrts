@@ -207,7 +207,7 @@ public class VersionDiff {
     }
 
     public static Set<ClassFileHandler> parseClassPath(String path) throws Exception {
-        Set<ClassFileHandler> result = new HashSet();
+        Set<ClassFileHandler> result = new TreeSet<>();
         String[] items = path.split(":");
         String[] var3 = items;
         int var4 = items.length;
