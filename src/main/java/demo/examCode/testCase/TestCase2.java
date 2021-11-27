@@ -1,7 +1,7 @@
-package set.hyrts.demo.testCase;
+package demo.examCode.testCase;
 
-import set.hyrts.demo.src.son;
-import set.hyrts.demo.test;
+import demo.examCode.src.son;
+import demo.examCode.test;
 
 public class TestCase2 implements test {
     @Override

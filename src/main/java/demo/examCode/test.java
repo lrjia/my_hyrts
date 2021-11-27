@@ -1,4 +1,4 @@
-package set.hyrts.demo;
+package demo.examCode;
 
 public interface test {
     void runTest();

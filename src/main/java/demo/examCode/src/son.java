@@ -1,4 +1,4 @@
-package set.hyrts.demo.src;
+package demo.examCode.src;
 
 public class son extends parent {
     @Override
@@ -8,9 +8,9 @@ public class son extends parent {
         System.out.println("son3");
         System.out.println("son4");
         System.out.println("son5");
-        System.out.println("son6");
-        System.out.println("son7");
-        System.out.println("son8");
-        System.out.println("son9");
+//        System.out.println("son6");
+//        System.out.println("son7");
+//        System.out.println("son8");
+//        System.out.println("son9");
     }
 }

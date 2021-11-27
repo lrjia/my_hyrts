@@ -1,12 +1,13 @@
-package set.hyrts;
+package demo;
 
 import set.hyrts.coverage.core.ClassTransformVisitor;
 import set.hyrts.coverage.core.CoverageData;
-import set.hyrts.demo.src.ClassB;
-import set.hyrts.demo.src.parent;
-import set.hyrts.demo.src.son;
-import set.hyrts.demo.testCase.TestCase1;
-import set.hyrts.demo.testCase.TestCase2;
+import demo.examCode.src.ClassB;
+import demo.examCode.src.parent;
+import demo.examCode.src.son;
+import demo.examCode.testCase.TestCase1;
+import demo.examCode.testCase.TestCase2;
+import set.hyrts.diff.ClassFileHandler;
 import set.hyrts.diff.VersionDiff;
 import set.hyrts.org.objectweb.asm.ClassReader;
 import set.hyrts.org.objectweb.asm.ClassVisitor;
@@ -18,10 +19,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Set;
 
 import static set.hyrts.coverage.junit.FTracerJUnitUtils.dumpCoverage;
 
-public class AddField {
+public class RunDemo {
 
     public static void instrumentBytecode(String classDir, String dotClassName) throws IOException {
         String slashClassName = dotClassName.replace(".", "/");
@@ -42,11 +44,18 @@ public class AddField {
     public static void instrumentAll() {
         try {
             CoverageData.reset();
-            instrumentBytecode(Properties.NEW_CLASSPATH + "son.class", son.class.getName());
-            instrumentBytecode(Properties.NEW_CLASSPATH + "parent.class", parent.class.getName());
-            instrumentBytecode(Properties.NEW_CLASSPATH + "ClassB.class", ClassB.class.getName());
+            Set<ClassFileHandler> set= VersionDiff.parseClassPath(Properties.NEW_CLASSPATH);
+            for (ClassFileHandler c :set){
+                String className=c.className.replace("\\",".");
+                className=className.substring(className.indexOf(targetPacketName));
+                System.out.println(className);
+                instrumentBytecode(c.filePath, className);
+            }
         } catch (IOException e) {
             System.err.println("插桩错误");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("遍历插桩类路径错误");
             e.printStackTrace();
         }
     }
@@ -75,10 +84,13 @@ public class AddField {
         }
     }
 
+    public static String targetPacketName;
+
     public static void main(String[] args) throws Exception {
         Properties.TRACER_COV_TYPE = "meth-cov";
         Properties.FILE_CHECKSUM = Properties.RTSVariant.HyRTS + "-checksum";
-        Properties.NEW_CLASSPATH = "C:\\Users\\lrjia\\codeUnSync\\my-hyrts\\target\\classes\\set\\hyrts\\demo\\src\\";
+        Properties.NEW_CLASSPATH = "target/classes/demo/examCode/src/";
+        targetPacketName="demo.examCode.src";
 
         int step = 3;
 
@@ -94,7 +106,6 @@ public class AddField {
             Properties.NEW_DIR = "./diff_new";
             System.out.println(HybridRTS.main());
         }
-
 
     }
 }

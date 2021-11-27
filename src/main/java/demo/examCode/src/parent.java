@@ -1,4 +1,4 @@
-package set.hyrts.demo.src;
+package demo.examCode.src;
 
 public class parent {
     public void sayHi(){

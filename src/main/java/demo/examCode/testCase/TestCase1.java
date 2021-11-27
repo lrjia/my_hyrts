@@ -1,7 +1,7 @@
-package set.hyrts.demo.testCase;
+package demo.examCode.testCase;
 
-import set.hyrts.demo.src.parent;
-import set.hyrts.demo.test;
+import demo.examCode.src.parent;
+import demo.examCode.test;
 
 public class TestCase1 implements test {
 
